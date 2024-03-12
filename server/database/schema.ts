@@ -9,5 +9,6 @@ export const tickets = sqliteTable('messages', {
   description: text('description').notNull()
 })
 
+// InferModel from drizzle-orm deprecated, replace asap for Production!
 export type Ticket = InferModel<typeof tickets>;
 export type InsertTicket = InferModel<typeof tickets, "insert">;
