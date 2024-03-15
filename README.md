@@ -3,7 +3,7 @@
 - [x] Migration through experimental Tasks
 - [x] Connect to Turso with experimental native useDatabase() (db0 layer)
 - [x] Integrate Drizzle ORM
-- [x] Write your own SQL schema
+- [x] Keep writing your own SQL `schema.ts` file.
 - [x] Keep using `drizzle.config.ts` and Drizzle Studio
 - [x] With default local dev database enabled        
 
