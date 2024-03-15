@@ -1,6 +1,4 @@
 import { tickets, InsertTicket } from "~/server/database/schema";
-import { orm } from "~/server/utils/db";
-
 
 export default defineEventHandler(async (event) => {
   try {

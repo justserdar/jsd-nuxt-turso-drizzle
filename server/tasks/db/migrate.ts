@@ -1,5 +1,3 @@
-import type { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3'
-import { migrate } from 'drizzle-orm/libsql/migrator'
 import { migrateDatabase } from "~/server/utils/db"
 
 export default defineTask({
