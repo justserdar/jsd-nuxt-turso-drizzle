@@ -19,14 +19,7 @@ export default defineNuxtConfig({
           url: process.env.TURSO_DB_URL,
           authToken: process.env.TURSO_DB_AUTH_TOKEN,
         }
-      },
-      strapi: {
-        connector: 'libsql',
-        options: {
-          url: process.env.TURSO_DB_URL,
-          authToken: process.env.TURSO_DB_AUTH_TOKEN,
-        }
-      },
+      }
     }
   },
 })
