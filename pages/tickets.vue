@@ -1,9 +1,18 @@
 <script lang="ts" setup>
-const { data: tickets, pending, error, status, refresh } = await useFetch("/api/tickets", {
+const { data: tickets, pending, error, status, refresh } = await useFetch("/api/v1/tickets", {
     method: "GET",
     immediate: false, // Don't fire automagically 
     server: false, // Don't auto-fire automagically serverside - Nitro
 });
+
+async function deleteById(id: string) {
+    await $fetch("/api/v1/tickets/delete", {
+        method: "GET",
+        query: { id }
+    });
+    await nextTick()
+    await refresh()
+}
 </script>
 
 <template>
@@ -29,6 +38,11 @@ const { data: tickets, pending, error, status, refresh } = await useFetch("/api/
                             d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                     </svg>
                 </button>
+                <p
+                to="/"
+                    class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+                    {{ status }}
+            </p>
             </div>
         </div>
         <div class="flex flex-col mt-6">
@@ -100,6 +114,11 @@ const { data: tickets, pending, error, status, refresh } = await useFetch("/api/
                                             </p>
                                         </div>
                                     </td>
+                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <template v-else>
                                     <tr v-for="(ticket, i) in tickets" :key="i">
@@ -132,6 +151,7 @@ const { data: tickets, pending, error, status, refresh } = await useFetch("/api/
 
                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
                                             <button
+                                            @click="deleteById(ticket.id)"
                                                 class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -142,6 +162,7 @@ const { data: tickets, pending, error, status, refresh } = await useFetch("/api/
                                         </td>
                                     </tr>
                                 </template>
+
                             </tbody>
                         </table>
                     </div>

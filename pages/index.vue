@@ -14,7 +14,7 @@ const handleSubmit = async (e: Event) => {
   errorMessage.value = null;
   const formData = new FormData(e.target);
   try {
-    await $fetch("/api/tickets/create", {
+    await $fetch("/api/v1/tickets/create", {
       method: "POST",
       body: <Ticket>{
         name: formData.get("name"),

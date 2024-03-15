@@ -1,5 +1,5 @@
-import { tickets } from "../../database/schema";
-import { orm } from "../../utils/db";
+import { tickets } from "~/server/database/schema";
+import { orm } from "~/server/utils/db";
 
 export default defineEventHandler(async () => {
   try {

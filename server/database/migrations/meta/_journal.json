@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1710382497575,
+      "tag": "0000_modern_living_tribunal",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1710382934186,
+      "tag": "0001_giant_microchip",
+      "breakpoints": true
+    }
+  ]
+}

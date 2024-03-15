@@ -1,17 +1,17 @@
-import { tickets } from "../../../database/schema";
-import { orm } from "../../../utils/db";
+import { tickets } from "~/server/database/schema";
+import { orm } from "~/server/utils/db";
 import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   try {
-    const ticketId = event.context.params?.id as string;
+    const ticketId = getQuery(event).id as string;
 		if(!ticketId) throw createError({
       statusCode: 400,
       statusMessage: "Ticket ID is required",
     });
     const allTickets = orm
       .delete(tickets)
-      .where(eq(tickets.id, parseInt(ticketId )))
+      .where(eq(tickets.id, parseInt(ticketId)))
       .run();
     return { tickets: allTickets };
 		/* or 

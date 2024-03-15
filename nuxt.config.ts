@@ -3,19 +3,30 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
   nitro: {
-		experimental: {
-			websocket: true,
-			tasks: true,
-			database: true,
-		},
-		database: {
-			default: {
-				connector: 'libsql',
-				options: {
-					url: process.env.TURSO_DB_URL,
-					authToken: process.env.TURSO_DB_AUTH_TOKEN,
-				}
-			},
-		}
-	},
+    experimental: {
+      websocket: true,
+      tasks: true,
+      database: true,
+    },
+    database: {
+      devDatabase: {
+        connector: 'sqlite',
+        options: { name: 'devDb' }
+      },
+      default: {
+        connector: 'libsql',
+        options: {
+          url: process.env.TURSO_DB_URL,
+          authToken: process.env.TURSO_DB_AUTH_TOKEN,
+        }
+      },
+      strapi: {
+        connector: 'libsql',
+        options: {
+          url: process.env.TURSO_DB_URL,
+          authToken: process.env.TURSO_DB_AUTH_TOKEN,
+        }
+      },
+    }
+  },
 })
