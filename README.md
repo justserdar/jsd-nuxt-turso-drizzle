@@ -1,7 +1,7 @@
 # Nuxt 3 Minimal Starter
 
 - [x] Migration through experimental Tasks
-- [x] Connect to Turso with experimental UseDatabase() (db0 layer)
+- [x] Connect to Turso with experimental native useDatabase() (db0 layer)
 - [x] Integrate Drizzle ORM
 - [x] Write your own SQL schema
 - [x] Keep using `drizzle.config.ts`
