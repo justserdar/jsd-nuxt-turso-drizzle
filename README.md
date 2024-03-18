@@ -1,6 +1,11 @@
 # Nuxt 3 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+- [x] Migration through experimental Tasks
+- [x] Connect to Turso with experimental native useDatabase() (db0 layer)
+- [x] Integrate Drizzle ORM
+- [x] Keep writing your own SQL `schema.ts` file.
+- [x] Keep using `drizzle.config.ts` and Drizzle Studio
+- [x] With default local dev database enabled        
 
 ## Setup
 
