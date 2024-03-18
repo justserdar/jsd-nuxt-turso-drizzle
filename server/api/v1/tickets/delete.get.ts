@@ -1,5 +1,4 @@
 import { tickets } from "~/server/database/schema";
-import { orm } from "~/server/utils/db";
 import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
