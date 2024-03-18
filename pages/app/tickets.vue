@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-const { data: tickets, pending, error, status, refresh } = await useFetch("/api/v1/tickets", {
+const { data: tickets, pending, error, status, refresh } = await useFetch("/api/v1/resources/tickets", {
     method: "GET",
     immediate: false, // Don't fire automagically 
     server: false, // Don't auto-fire automagically serverside - Nitro
 });
 
 async function deleteById(id: string) {
-    await $fetch("/api/v1/tickets/delete", {
+    await $fetch("/api/v1/resources/tickets/delete", {
         method: "GET",
         query: { id }
     });
@@ -22,7 +22,7 @@ async function deleteById(id: string) {
             <h2 class="text-lg font-medium text-gray-800 dark:text-white">Tickets</h2>
             <div class="flex items-center gap-x-4 justify-between mt-6">
                 <NuxtLink
-                to="/"
+                to="/app/"
                     class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
                     Create Ticket
                 </NuxtLink>

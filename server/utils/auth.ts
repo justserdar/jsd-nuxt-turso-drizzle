@@ -1,7 +1,6 @@
 import { Lucia } from "lucia";
 import { BetterSqlite3Adapter } from "@lucia-auth/adapter-sqlite";
-import { db } from "./db";
-import { GitHub } from "arctic";
+import { GitHub, Google } from "arctic";
 
 import type { DatabaseUser } from "./db";
 
@@ -36,4 +35,5 @@ declare module "lucia" {
 
 const config = useRuntimeConfig();
 
-export const github = new GitHub(config.githubClientId, config.githubClientSecret);
+export const github = new GitHub(process.env.GITHUB_CLIENT_ID as string, process.env.GITHUB_CLIENT_SECRET as string);
+export const google = new Google(config.googleClientId, config.googleClientSecret, config.googleRedirectUrl);

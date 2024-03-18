@@ -1,3 +1,4 @@
+// server/routes/login/github/index.get.ts
 import { generateState } from "arctic";
 
 export default defineEventHandler(async (event) => {

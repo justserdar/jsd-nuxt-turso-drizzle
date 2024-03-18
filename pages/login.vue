@@ -1,5 +1,8 @@
 <template>
-	<h1>Sign in</h1>
-	<a href="/login/github">Sign in with GitHub</a>
-    <a href="/login/google">Sign in with Google</a>
+	<div class="flex flex-col">
+		<a href="/v1/auth/login/github">Sign in with GitHub</a>
+		<a href="/v1/auth/login/google">Sign in with Google</a>
+	</div>
+
+	<NuxtLink to="/">Return</NuxtLink>
 </template>

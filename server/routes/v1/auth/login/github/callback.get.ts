@@ -1,5 +1,8 @@
+// server/routes/login/github/callback.get.ts
 import { OAuth2RequestError } from "arctic";
 import { generateId } from "lucia";
+import { eq } from 'drizzle-orm'
+import { user } from '~/server/database/schema'
 
 export default defineEventHandler(async (event) => {
 	const query = getQuery(event);
@@ -20,27 +23,31 @@ export default defineEventHandler(async (event) => {
 			}
 		});
 		const githubUser: GitHubUser = await githubUserResponse.json();
-		const existingUser = db.prepare("SELECT * FROM user WHERE github_id = ?").get(githubUser.id) as
-			| DatabaseUser
-			| undefined;
+
+		// Replace this with your own DB client.
+		const [existingUser] = await orm.select({ id: user.id }).from(user).where(eq(user.github_id, githubUser.id))
 
 		if (existingUser) {
-			const session = await lucia.createSession(existingUser.id, {});
-			appendHeader(event, "Set-Cookie", lucia.createSessionCookie(session.id).serialize());
-			return sendRedirect(event, "/");
-		}
+			const session = await lucia.createSession(existingUser.id, {})
+			appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
+			return sendRedirect(event, '/')
+		  }
 
 		const userId = generateId(15);
-		db.prepare("INSERT INTO user (id, github_id, username) VALUES (?, ?, ?)").run(
-			userId,
-			githubUser.id,
-			githubUser.login
-		);
+
+		// Replace this with your own DB client.
+		await orm.insert(user).values({
+			id: userId,
+			github_id: githubUser.id,
+			username: githubUser.login,
+		  })
+
 		const session = await lucia.createSession(userId, {});
 		appendHeader(event, "Set-Cookie", lucia.createSessionCookie(session.id).serialize());
 		return sendRedirect(event, "/");
 	} catch (e) {
-		if (e instanceof OAuth2RequestError && e.message === "bad_verification_code") {
+		// the specific error message depends on the provider
+		if (e instanceof OAuth2RequestError && e.message === 'bad_verification_code') {
 			// invalid code
 			throw createError({
 				status: 400
