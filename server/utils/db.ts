@@ -1,5 +1,6 @@
 import { drizzle } from "db0/integrations/drizzle/index"; 
 export const orm = drizzle(useDatabase());
+export const db = useDatabase();
 
 export function migrateDatabase() {
   const db = useDatabase();
@@ -20,4 +21,10 @@ export function migrateDatabase() {
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )`;
+}
+
+export interface DatabaseUser {
+	id: string;
+	username: string;
+	github_id: number;
 }
